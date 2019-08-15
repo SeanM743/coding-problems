@@ -125,4 +125,54 @@ def insertion_sort(L):
 
     return dummy_head.next
 
-            
+'''Create a sorting algorithm that performs a stable sort on a list'''
+
+def stable_list_sort(L):
+
+    '''list_merge_sort takes two ordered lists and merges them'''
+    def list_merge_sort(L1, L2):
+        dummy_head = tail = ListNode()
+
+        while L1 and L2:
+            if L1.data < L2.data:
+                tail.next = L1
+                L1 = L1.next
+            else:
+                tail.next = L2
+                L2 = L2.next
+            tail = tail.next
+
+        tail.next = L1 or L2
+
+        return dummy_head.next
+    
+    if not L or not L.next:
+        return L
+    
+    fast, slow, pre = L, L, ListNode(0, L)
+
+    while L and L.next:
+        fast, slow, pre = fast.next.next, slow.next, pre.next
+    pre.next = None
+
+    return list_merge_sort(stable_list_sort(L), stable_list_sort(slow))
+
+'''Define an algo that returns the salary cap for a company to keep total payroll under a certain 
+amount. If employee earns less than cap their salary will not change.
+For example, if salaries are 80, 150, 200 and desired payroll is 380k, cap could be 150'''
+
+def calculate_payroll_cap(salaries, max_payroll):
+    n = len(salaries)
+
+    salary_cum = 0
+    salaries.sort()
+    for i, salary in salaries:
+        adjusted_salary = (n-i)* salary + salary_cum
+        salary_cum + adjusted_salary >= max_payroll:
+            return (max_payroll - salary_cum) / (n-i)
+        salary_cum += salary
+    
+    return None
+
+
+
