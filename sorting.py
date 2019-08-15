@@ -19,4 +19,20 @@ b = [1,3,7]
 
 print(intersect_lists2(a,b))
 
+def intersect_lists3(a,b):
+    i, j, intersect_union = 0, 0, []
+
+    while i < len(a) and j < len(b):
+        if a[i] == b[i]:
+            if i ==0 and a[i] != a[i-1]:
+                intersect_union.append(a[i])
+            i, j = i+1, j+1
+        elif a[i] < b[i]:
+            i += 1
+        else:
+            j += 1
+    
+    return intersect_union
+
+
     
