@@ -167,8 +167,8 @@ def calculate_payroll_cap(salaries, max_payroll):
     salary_cum = 0
     salaries.sort()
     for i, salary in salaries:
-        adjusted_salary = (n-i)* salary + salary_cum
-        salary_cum + adjusted_salary >= max_payroll:
+        adjusted_salary = (n-i) * salary + salary_cum
+        if salary_cum + adjusted_salary >= max_payroll:
             return (max_payroll - salary_cum) / (n-i)
         salary_cum += salary
     
