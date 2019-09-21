@@ -198,4 +198,10 @@ def gray_code_generator2(n):
 
 print(gray_code_generator2(3))
 
+def gray_code_generator3(n):
+    result = [0]
+    for i in range(n):
+        result += [b + 2**i for b in reversed(result)]
+    return result
+    
 
